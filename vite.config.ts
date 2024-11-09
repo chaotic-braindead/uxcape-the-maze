@@ -5,7 +5,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 export default defineConfig({
     plugins: [react(), vanillaExtractPlugin()],
     build: {
-      target: 'es2017',
+      target: 'node16',
     },
     resolve: {
       alias: {

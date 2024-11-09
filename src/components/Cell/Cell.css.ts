@@ -27,19 +27,19 @@ export const singleCellCurrentlyVisited = style({
 });
 
 export const facingLeft = style({
-  backgroundImage: `url("left.png")`
+  backgroundImage: `url("/left.png")`
 });
 
 export const facingRight = style({
-  backgroundImage: `url("right.png")`
+  backgroundImage: `url("/right.png")`
 });
 
 export const facingTop = style({
-  backgroundImage: `url("top.png")`
+  backgroundImage: `url("/top.png")`
 });
 
 export const facingBottom = style({
-  backgroundImage: `url("bottom.png")`
+  backgroundImage: `url("/bottom.png")`
 });
 
 export const locked = style({
@@ -48,5 +48,5 @@ export const locked = style({
   backgroundSize: 'cover', 
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat', 
-  backgroundImage: `url("lock.png")`
+  backgroundImage: `url("/lock.png")`
 });
