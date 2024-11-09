@@ -36,7 +36,10 @@ export const Game = ({ initialDifficulty, isGameInProgress, clearDifficulty, onG
 
   const questions: Question[] = [
     {question: "What is UI?", choices: ["wee", "woo"], answer: 0},
-    {question: "What is UX?", choices: ["wee", "woo"], answer: 1}
+    {question: "What is UX?", choices: ["wee", "woo"], answer: 1},
+    {question: "What is UX?", choices: ["wee", "woo"], answer: 1},
+    {question: "What is UX?", choices: ["wee", "woo"], answer: 1},
+    {question: "What is UX?", choices: ["wee", "woo"], answer: 1},
   ]
 
   useEffect(() => {
@@ -65,8 +68,12 @@ export const Game = ({ initialDifficulty, isGameInProgress, clearDifficulty, onG
       canMoveRef.current = false;
       setTimeout(() => canMoveRef.current = true, 3000);
     }
-    setIsLockTouched(false);
-    indexRef.current = indexRef.current + 1;
+
+    setTimeout(() => {
+      setIsLockTouched(false);
+      indexRef.current = indexRef.current + 1;
+    }, 1000);
+    // setIsLockTouched(false);
   }
   
   const displayPopup = useCallback(() => {
@@ -79,7 +86,10 @@ export const Game = ({ initialDifficulty, isGameInProgress, clearDifficulty, onG
 
   return (
     <>
-      {isLockTouched && <Popup question={questions[indexRef.current]} onSelectChoice={handleSelectChoice} />}
+      {isLockTouched && 
+      <Popup 
+        question={questions[indexRef.current]} 
+        onSelectChoice={handleSelectChoice} />}
       <Board
         solution={solution}
         isLockTouched={isLockTouched}
@@ -92,11 +102,11 @@ export const Game = ({ initialDifficulty, isGameInProgress, clearDifficulty, onG
       {<h2>Time Taken (in seconds): {timeInSeconds}</h2>}
       {result && 
       <Result onNewGame={startNewGame}
-              clearDifficulty={clearDifficulty}
-              onGameEnd={onGameEnd} 
-              stopTimer={stopTimer} 
-              timeInSeconds={timeInSeconds} 
-              onLeaderboardClick={onLeaderboardClick}/>}
+        clearDifficulty={clearDifficulty}
+        onGameEnd={onGameEnd} 
+        stopTimer={stopTimer} 
+        timeInSeconds={timeInSeconds} 
+        onLeaderboardClick={onLeaderboardClick}/>}
     </>
   );
 };

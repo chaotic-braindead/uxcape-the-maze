@@ -4,10 +4,15 @@ import {
   singleCellCurrentlyVisited,
   singleCellMazeEnd,
   singleCellSolutionPart,
-  asset
+  locked,
+  facingBottom,
+  facingLeft,
+  facingRight,
+  facingTop
 } from './Cell.css';
 import { useEffect, useMemo, useRef } from 'react';
 import lock from '../../assets/lock.png';
+import { RelativeDirection } from '@/model/enums/relativeDirection';
 
 interface CellProps {
   cell: MazeCell;
@@ -15,6 +20,7 @@ interface CellProps {
   mazeEnd: boolean;
   solution: Array<MazeCell>;
   showSolution: boolean;
+  playerDirection: RelativeDirection;
 }
 
 export const Cell = ({
@@ -23,6 +29,7 @@ export const Cell = ({
   mazeEnd,
   solution,
   showSolution,
+  playerDirection
 }: CellProps) => {
   const partOfTheSolution = useMemo(
     () => solution.includes(cell),
@@ -40,6 +47,25 @@ export const Cell = ({
     [cell],
   );
 
+  const getPlayerDirectionImage = () => {
+    let image: string = "";
+    switch(playerDirection){
+      case RelativeDirection.DOWN:
+        image = facingBottom;
+        break;
+      case RelativeDirection.UP:
+        image = facingTop;
+        break;
+      case RelativeDirection.LEFT:
+        image = facingLeft;
+        break;
+      case RelativeDirection.RIGHT:
+        image = facingRight;
+        break;
+    }
+    return image;
+  }
+
   useEffect(() => {lockedRef.current = cell.locked;}, [cell.locked])
 
   return (
@@ -47,11 +73,10 @@ export const Cell = ({
       style={cellStyles}
       data-testid={`cell_${cell.coordinates.y}_${cell.coordinates.x}`}
       className={`${singleCell} ${mazeEnd ? singleCellMazeEnd : ''} ${
-        playerVisiting ? singleCellCurrentlyVisited : ''
-      } ${showSolution && partOfTheSolution ? singleCellSolutionPart : ''} ${cell.locked ? asset: ''}`}
+        playerVisiting ? `${singleCellCurrentlyVisited} ${getPlayerDirectionImage()}` : ''
+      } ${showSolution && partOfTheSolution ? singleCellSolutionPart : ''} ${cell.locked ? locked: ''}`}
       key={`${cell.coordinates.y}${cell.coordinates.x}`}
     >
-      {/* {cell.locked && <img src={lock} className={asset}/>} */}
       </div>
   );
 };

@@ -31,6 +31,7 @@ export const Board = ({
     x: 0,
     y: 0,
   });
+  const [playerDirection, setPlayerDirection] = useState<RelativeDirection>(RelativeDirection.DOWN);
   const cheating = useCheat(CHEAT_CODE);
 
   useEffect(() => {
@@ -45,19 +46,20 @@ export const Board = ({
   }, [playerPosition])
 
   const movePlayer = (direction: RelativeDirection) => {
+    setPlayerDirection(direction);
     switch (direction) {
       case RelativeDirection.DOWN:
         setPlayerPosition(({ x, y }) => ({ x, y: y + 1 }));
         break;
-        case RelativeDirection.UP:
+      case RelativeDirection.UP:
         setPlayerPosition(({ x, y }) => ({ x, y: y - 1 }));
         break;
       case RelativeDirection.LEFT:
         setPlayerPosition(({ x, y }) => ({ x: x - 1, y }));
         break;
       case RelativeDirection.RIGHT:
-          setPlayerPosition(({ x, y }) => ({ x: x + 1, y }));
-          break;
+        setPlayerPosition(({ x, y }) => ({ x: x + 1, y }));
+        break;
       }
   };
 
@@ -86,6 +88,7 @@ export const Board = ({
                 cell.coordinates.y === board.length - 1
               }
               key={`${currentY}_${currentX}`}
+              playerDirection={playerDirection}
             />
           )),
         )}

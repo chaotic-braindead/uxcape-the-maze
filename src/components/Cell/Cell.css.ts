@@ -24,10 +24,25 @@ export const singleCellCurrentlyVisited = style({
   backgroundSize: 'cover', 
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat', 
-  backgroundImage: `url("character.png")`
 });
 
-export const asset = style({
+export const facingLeft = style({
+  backgroundImage: `url("left.png")`
+});
+
+export const facingRight = style({
+  backgroundImage: `url("right.png")`
+});
+
+export const facingTop = style({
+  backgroundImage: `url("top.png")`
+});
+
+export const facingBottom = style({
+  backgroundImage: `url("bottom.png")`
+});
+
+export const locked = style({
   width: '100%',
   height: '100%',
   backgroundSize: 'cover', 

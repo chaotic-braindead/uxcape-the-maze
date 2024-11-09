@@ -15,12 +15,13 @@ export const overlay = style({
 });
 
 export const content = style({
-  backgroundColor: '#fff',
-  padding: '20px',
-  borderRadius: '8px',
-  width: '300px',
+  backgroundColor: vars.color.dark.main,
+  padding: '50px',
+  borderRadius: '20px',
   textAlign: 'center',
-  position: 'relative'
+  justifyContent: 'center',
+  flexDirection: 'column',
+  display: 'flex',
 });
 
 export const close = style({
@@ -41,5 +42,23 @@ export const choicesList = style({
 export const choicesListLi = style({
   padding: '10px',
   cursor: 'pointer',
-  borderBottom: `1px solid ${vars.color.light.main}`
+  marginTop: '1rem',
+  borderRadius: '10px',
+  ':hover': {
+    backgroundColor: `rgba(45, 32, 54, 0.75)`
+  }
+})
+
+export const correctAnswer = style({
+  backgroundColor: '#32a852',
+  ':hover': {
+    backgroundColor: '#32a852'
+  }
+})
+
+export const wrongAnswer = style({
+  backgroundColor: '#c42339',
+  ':hover': {
+    backgroundColor: '#c42339'
+  }
 })

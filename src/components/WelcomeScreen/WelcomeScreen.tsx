@@ -23,8 +23,9 @@ export const WelcomeScreen = ({ onGameStart, displayLeaderboard, onLeaderboardCl
   <>
     <h1 className={heading}>UXCape the Maze</h1>
     <p className={description}>
-      Description
+    The objective is to complete the maze in the shortest time possible, with correct answers unlocking paths and wrong answers resulting in a temporary stun.
     </p>
+    <p>Movement: Arrow Keys</p>
     <DifficultySelector onDifficultyChosen={onGameStart} onLeaderboardClick={onLeaderboardClick}/>
   </>
 )};

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { query, collection, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Button } from "../Button";
+import { content } from "./leaderboard.css";
 
 interface Player {
     id: string;
@@ -77,7 +78,7 @@ export const Leaderboard = ({onLeaderboardExit}: LeaderboardProps) => {
       }
     
       return (
-        <div>
+        <div className={content}>
           <h2>Leaderboard</h2>
           <table>
             <thead>
@@ -98,7 +99,7 @@ export const Leaderboard = ({onLeaderboardExit}: LeaderboardProps) => {
             </tbody>
           </table>
           <Button onClick={onLeaderboardExit}>
-            Back to Game
+            Back to Home
           </Button>
         </div>
       );
