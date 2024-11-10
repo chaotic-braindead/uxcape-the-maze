@@ -15,10 +15,10 @@ export const generateMaze = ({ width, height }: Size): Maze => {
     const neighbour = getRandomUnvisitedNeighbour(cell, maze);
 
     if (neighbour) {
-      if (Math.floor(Math.random() * 35) == 1 && lockedCount < maxLocks) {
-        neighbour.locked = true;
-        lockedCount++;
-      }
+      // if (Math.floor(Math.random() * 35) == 1 && lockedCount < maxLocks) {
+      //   neighbour.locked = true;
+      //   lockedCount++;
+      // }
       neighbour.visitedDuringGenerating = true;
       cellStack.push(neighbour);
       carveWalls([cell, neighbour]);
