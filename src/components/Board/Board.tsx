@@ -5,8 +5,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { RelativeDirection } from '@/model/enums/relativeDirection';
 import { PlayerMoves } from '@/components/PlayerMoves';
 import { GameResult } from '@/model/gameResult';
-import { useCheat } from '@/hooks/';
-import { CHEAT_CODE } from '@/constants/cheatCode';
 
 interface BoardProps {
   board: Maze;
@@ -32,7 +30,6 @@ export const Board = ({
     y: 0,
   });
   const [playerDirection, setPlayerDirection] = useState<RelativeDirection>(RelativeDirection.DOWN);
-  const cheating = useCheat(CHEAT_CODE);
 
   useEffect(() => {
     setPlayerPosition({ x: 0, y: 0 });
@@ -77,7 +74,6 @@ export const Board = ({
         {board.map((row, currentY) =>
           row.map((cell, currentX) => (
             <Cell
-              showSolution={cheating}
               solution={solution}
               cell={cell}
               playerVisiting={

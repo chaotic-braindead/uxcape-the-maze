@@ -1,6 +1,7 @@
 import { Size } from '@/model/size';
 import { Maze, MazeCell } from '@/model/maze';
 import { RelativeDirection } from '@/model/enums/relativeDirection';
+import { maxLocks } from '@/constants/num';
 
 export const generateMaze = ({ width, height }: Size): Maze => {
   const maze: Maze = createMazeBoilerplate(width, height);
@@ -14,7 +15,7 @@ export const generateMaze = ({ width, height }: Size): Maze => {
     const neighbour = getRandomUnvisitedNeighbour(cell, maze);
 
     if (neighbour) {
-      if (Math.floor(Math.random() * 35) == 1 && lockedCount < 10) {
+      if (Math.floor(Math.random() * 35) == 1 && lockedCount < maxLocks) {
         neighbour.locked = true;
         lockedCount++;
       }

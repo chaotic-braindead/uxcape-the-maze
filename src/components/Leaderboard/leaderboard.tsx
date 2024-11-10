@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { query, collection, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Button } from "../Button";
-import { content } from "./leaderboard.css";
+import { content, spinner } from "./leaderboard.css";
 
 interface Player {
     id: string;
@@ -19,6 +19,7 @@ interface LeaderboardProps {
 export const Leaderboard = ({onLeaderboardExit}: LeaderboardProps) => {
     const [players, setPlayers] = useState<Player[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string>("");
     const firstTimeLoadingRef = useRef<boolean>(true);
 
     const fetchTopPlayers = async () => {
@@ -46,7 +47,7 @@ export const Leaderboard = ({onLeaderboardExit}: LeaderboardProps) => {
         setPlayers(uniquePlayers.slice(0, 10));
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching top players: ", error);
+        setError("Error fetching top players: "+error);
         setLoading(false);
       }
     };
@@ -74,7 +75,11 @@ export const Leaderboard = ({onLeaderboardExit}: LeaderboardProps) => {
       }
 
       if (loading) {
-        return <div>Loading leaderboard...</div>;
+        return <img src="/spinner.svg" />;
+      }
+
+      if(error){
+        return <h2>{error}</h2>
       }
     
       return (

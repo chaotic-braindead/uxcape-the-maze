@@ -19,7 +19,6 @@ interface CellProps {
   playerVisiting: boolean;
   mazeEnd: boolean;
   solution: Array<MazeCell>;
-  showSolution: boolean;
   playerDirection: RelativeDirection;
 }
 
@@ -28,7 +27,6 @@ export const Cell = ({
   playerVisiting,
   mazeEnd,
   solution,
-  showSolution,
   playerDirection
 }: CellProps) => {
   const partOfTheSolution = useMemo(
@@ -74,7 +72,7 @@ export const Cell = ({
       data-testid={`cell_${cell.coordinates.y}_${cell.coordinates.x}`}
       className={`${singleCell} ${mazeEnd ? singleCellMazeEnd : ''} ${
         playerVisiting ? `${singleCellCurrentlyVisited} ${getPlayerDirectionImage()}` : ''
-      } ${showSolution && partOfTheSolution ? singleCellSolutionPart : ''} ${cell.locked ? locked: ''}`}
+      } ${cell.locked ? locked: ''}`}
       key={`${cell.coordinates.y}${cell.coordinates.x}`}
     >
       </div>
