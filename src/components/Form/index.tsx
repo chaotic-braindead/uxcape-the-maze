@@ -1,3 +1,3 @@
-import Form from "./form";
+import { Form } from '@/components/Form/Form';
 
-export { Form }
+export { Form };

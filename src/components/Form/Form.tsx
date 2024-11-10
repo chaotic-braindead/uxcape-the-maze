@@ -1,5 +1,4 @@
-import {overlay, content} from './form.css';
-import { useState } from 'react';
+import {overlay, content} from './Form.css';
 
 interface FormProps {
   children?: React.ReactNode;
@@ -14,5 +13,3 @@ export const Form = ({ children }: FormProps) => {
     </div>
   );
 };
-
-export default Form;
