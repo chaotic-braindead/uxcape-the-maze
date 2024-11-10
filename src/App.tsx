@@ -4,16 +4,16 @@ import { Difficulty } from '@/model/enums/difficulty';
 import { Game } from '@/components/Game';
 import { mainContainer, screenDisclaimer } from '@/App.css';
 import { useMediaQuery } from '@/hooks/';
-import { Leaderboard } from './components/Leaderboard';
-import { clear } from '@testing-library/user-event/dist/clear';
 
 export const App = () => {
   const [isGameInProgress, setIsGameInProgress] = useState(false);
   const [initialDifficulty, setInitialDifficulty] = useState<Difficulty>();
   const [displayLeaderboard, setDisplayLeaderboard] = useState<boolean>(false);
   const isScreenLargeEnough = useMediaQuery(
-    'screen and (min-width: 1024px) and (min-height: 768px)',
+    'screen and (min-width: 720px) and (min-height: 790px)',
   );
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isPC = userAgent.includes("windows") || userAgent.includes("macintosh") || userAgent.includes("linux");
 
   const startGame = useCallback((difficulty: Difficulty) => {
     setIsGameInProgress(true);
@@ -30,19 +30,17 @@ export const App = () => {
 
   const onLeaderboardClick = useCallback(() => {
     setDisplayLeaderboard(true);
-    console.log("clicked leaderbiorad");
-    console.log(displayLeaderboard);
   }, []);
 
   const onLeaderboardExit = useCallback(() => {
     setDisplayLeaderboard(false);
   }, []);
 
-  if (!isScreenLargeEnough) {
+  if (!isScreenLargeEnough || !isPC) {
     return (
       <main className={mainContainer}>
         <h1 className={screenDisclaimer}>
-          This game can only be played on desktop‑sized screen and with a keyboard.
+          This game can only be played on a desktop‑sized screen and with a keyboard.
         </h1>
       </main>
     );
