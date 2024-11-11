@@ -68,7 +68,7 @@ export const Board = ({
   );
 
   return (
-    <>
+    <div style={{display: 'flex', flex: 'column'}}>
       <div
         className={container}
         style={{ '--current-board-height': board.length }}
@@ -101,6 +101,6 @@ export const Board = ({
           canMoveRef={canMoveRef}
         />
       )}
-    </>
+    </div>
   );
 };
