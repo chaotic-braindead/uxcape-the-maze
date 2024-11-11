@@ -5,7 +5,7 @@ export const mainContainer = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: vars.spacing.xlarge,
+  gap: vars.spacing.large,
   maxWidth: '1200px',
   margin: '0 auto',
 });

@@ -8,9 +8,9 @@ export const heading = style({
   color: vars.color.accent.warm.secondary,
 });
 
-const throwAndSpin = keyframes({
+const dropDown = keyframes({
   '0%': {
-    transform: 'translateY(-1000px) translateX(-1000px) rotate(-720deg)',
+    transform: 'translateY(-1000px)',
     opacity: 0,
   },
   '100%': {
@@ -24,5 +24,5 @@ export const titleCard = style({
   height: 'auto',
   maxHeight: '70vh',
   marginBottom: '-100px',
-  animation: `${throwAndSpin} 1.3s ease-out`,
+  animation: `${dropDown} 1.3s ease-out`,
 });

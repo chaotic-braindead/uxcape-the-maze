@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { query, collection, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { Button } from '../Button';
-import { content, spinner } from './leaderboard.css';
+import { content, spinner, tableContainer } from './leaderboard.css';
+import { titleCard, buttonImg } from './leaderboard.css';
 
 interface Player {
   id: string;
@@ -83,26 +84,32 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
 
   return (
     <div className={content}>
-      <h2>Leaderboard</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Player Name</th>
-            <th>Time Taken (seconds)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {getRankedPlayers().map((player) => (
-            <tr key={player.id}>
-              <td>{player.rank}</td>
-              <td>{player.username}</td>
-              <td>{player.timeTaken}</td>
+      <img className={titleCard} src="/leaderboard-title.png" alt="leaderboards"/>
+      <div className={tableContainer}>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player Name</th>
+              <th>Time Taken</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <Button onClick={onLeaderboardExit}>Back to Home</Button>
+          </thead>
+          <tbody>
+            {getRankedPlayers().map((player) => (
+              <tr key={player.id}>
+                <td>{player.rank}</td>
+                <td>{player.username}</td>
+                <td>{player.timeTaken}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <Button onClick={onLeaderboardExit}>
+          <img className={buttonImg} src="/back.png" alt="back" />
+        </Button>
+      </div>
     </div>
   );
 };
