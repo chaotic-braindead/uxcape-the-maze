@@ -9,9 +9,7 @@ export const App = () => {
   const [isGameInProgress, setIsGameInProgress] = useState(false);
   const [initialDifficulty, setInitialDifficulty] = useState<Difficulty>();
   const [displayLeaderboard, setDisplayLeaderboard] = useState<boolean>(false);
-  const isScreenLargeEnough = useMediaQuery(
-    'screen and (min-width: 720px) and (min-height: 790px)',
-  );
+  const isScreenLargeEnough = useMediaQuery('screen and (min-width: 720px)');
   const userAgent = navigator.userAgent.toLowerCase();
   const isPC =
     userAgent.includes('windows') ||

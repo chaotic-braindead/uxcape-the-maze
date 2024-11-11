@@ -1,6 +1,9 @@
 import { Difficulty } from '@/model/enums/difficulty';
 import { Button } from '@/components/Button';
-import { buttonsContainer } from '@/components/DifficultySelector/DifficultySelector.css';
+import {
+  buttonImg,
+  buttonsContainer,
+} from '@/components/DifficultySelector/DifficultySelector.css';
 import { useRef } from 'react';
 
 interface DifficultySelectorProps {
@@ -16,9 +19,11 @@ export const DifficultySelector = ({
     <div className={buttonsContainer}>
       {/* <Button onClick={() => onDifficultyChosen(Difficulty.EASY)}>Easy</Button> */}
       <Button onClick={() => onDifficultyChosen(Difficulty.NORMAL)}>
-        Play
+        <img className={buttonImg} src="/play.png" alt="Play" />
       </Button>
-      <Button onClick={onLeaderboardClick}>Leaderboard</Button>
+      <Button onClick={onLeaderboardClick}>
+        <img className={buttonImg} src="/leaderboard.png" alt="Leaderboard" />
+      </Button>
       {/* <Button onClick={() => onDifficultyChosen(Difficulty.HARD)}>Hard</Button> */}
     </div>
   );

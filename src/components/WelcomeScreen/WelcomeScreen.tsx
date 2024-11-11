@@ -1,10 +1,9 @@
 import { Difficulty } from '@/model/enums/difficulty';
 import {
-  description,
   heading,
+  titleCard,
 } from '@/components/WelcomeScreen/WelcomeScreen.css';
 import { DifficultySelector } from '@/components/DifficultySelector';
-import { useRef, useState } from 'react';
 import { Leaderboard } from '../Leaderboard';
 
 export interface WelcomeScreenProps {
@@ -25,13 +24,13 @@ export const WelcomeScreen = ({
   }
   return (
     <>
-      <h1 className={heading}>UXCape the Maze</h1>
-      <p className={description}>
-        The objective is to complete the maze in the shortest time possible,
-        with correct answers unlocking paths and wrong answers resulting in a
-        temporary stun.
-      </p>
-      <p>Movement: Arrow Keys</p>
+      <h1 className={heading}>
+        <img
+          className={titleCard}
+          src="/titlecard.png"
+          alt="UX-Scape The Maze"
+        />
+      </h1>
       <DifficultySelector
         onDifficultyChosen={onGameStart}
         onLeaderboardClick={onLeaderboardClick}

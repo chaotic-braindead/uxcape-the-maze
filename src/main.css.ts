@@ -8,7 +8,7 @@ globalStyle('*', {
 });
 
 globalStyle('body', {
-  background: vars.color.dark.main,
+  backgroundImage: 'url(/bg.png)',
   color: vars.color.light.main,
   margin: vars.spacing.xlarge,
   lineHeight: '170%',
