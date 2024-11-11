@@ -13,7 +13,10 @@ export const App = () => {
     'screen and (min-width: 720px) and (min-height: 790px)',
   );
   const userAgent = navigator.userAgent.toLowerCase();
-  const isPC = userAgent.includes("windows") || userAgent.includes("macintosh") || userAgent.includes("linux");
+  const isPC =
+    userAgent.includes('windows') ||
+    userAgent.includes('macintosh') ||
+    userAgent.includes('linux');
 
   const startGame = useCallback((difficulty: Difficulty) => {
     setIsGameInProgress(true);
@@ -26,7 +29,7 @@ export const App = () => {
 
   const clearDifficulty = useCallback(() => {
     setInitialDifficulty(undefined);
-  }, [])
+  }, []);
 
   const onLeaderboardClick = useCallback(() => {
     setDisplayLeaderboard(true);
@@ -40,7 +43,8 @@ export const App = () => {
     return (
       <main className={mainContainer}>
         <h1 className={screenDisclaimer}>
-          This game can only be played on a desktop‑sized screen and with a keyboard.
+          This game can only be played on a desktop‑sized screen and with a
+          keyboard.
         </h1>
       </main>
     );
@@ -49,9 +53,21 @@ export const App = () => {
   return (
     <main className={mainContainer}>
       {initialDifficulty ? (
-        <Game initialDifficulty={initialDifficulty} isGameInProgress={isGameInProgress} clearDifficulty={clearDifficulty} onGameEnd={endGame} onLeaderboardClick={onLeaderboardClick} onLeaderboardExit={onLeaderboardExit}/>
+        <Game
+          initialDifficulty={initialDifficulty}
+          isGameInProgress={isGameInProgress}
+          clearDifficulty={clearDifficulty}
+          onGameEnd={endGame}
+          onLeaderboardClick={onLeaderboardClick}
+          onLeaderboardExit={onLeaderboardExit}
+        />
       ) : (
-        <WelcomeScreen onGameStart={startGame} displayLeaderboard={displayLeaderboard} onLeaderboardClick={onLeaderboardClick} onLeaderboardExit={onLeaderboardExit}/>
+        <WelcomeScreen
+          onGameStart={startGame}
+          displayLeaderboard={displayLeaderboard}
+          onLeaderboardClick={onLeaderboardClick}
+          onLeaderboardExit={onLeaderboardExit}
+        />
       )}
     </main>
   );

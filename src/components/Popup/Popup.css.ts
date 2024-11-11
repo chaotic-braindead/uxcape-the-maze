@@ -11,7 +11,7 @@ export const overlay = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  zIndex: 1000
+  zIndex: 1000,
 });
 
 export const content = style({
@@ -31,13 +31,13 @@ export const close = style({
   background: 'none',
   border: 'none',
   fontSize: '18px',
-  cursor: 'pointer'
+  cursor: 'pointer',
 });
 
 export const choicesList = style({
   listStyle: 'none',
-  padding: 0
-})
+  padding: 0,
+});
 
 export const choicesListLi = style({
   padding: '10px',
@@ -45,20 +45,20 @@ export const choicesListLi = style({
   marginTop: '1rem',
   borderRadius: '10px',
   ':hover': {
-    backgroundColor: `rgba(45, 32, 54, 0.75)`
-  }
-})
+    backgroundColor: `rgba(45, 32, 54, 0.75)`,
+  },
+});
 
 export const correctAnswer = style({
   backgroundColor: '#32a852',
   ':hover': {
-    backgroundColor: '#32a852'
-  }
-})
+    backgroundColor: '#32a852',
+  },
+});
 
 export const wrongAnswer = style({
   backgroundColor: '#c42339',
   ':hover': {
-    backgroundColor: '#c42339'
-  }
-})
+    backgroundColor: '#c42339',
+  },
+});

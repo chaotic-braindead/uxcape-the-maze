@@ -22,4 +22,3 @@ export const KEY_TO_SYMBOL: Record<ArrowKey, string> = {
   [ArrowKey.LEFT]: '←',
   [ArrowKey.RIGHT]: '→',
 };
-

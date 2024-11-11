@@ -9,18 +9,17 @@ interface DifficultySelectorProps {
 }
 
 export const DifficultySelector = ({
-  onDifficultyChosen, onLeaderboardClick
+  onDifficultyChosen,
+  onLeaderboardClick,
 }: DifficultySelectorProps) => {
-  
-  
   return (
-  <div className={buttonsContainer}>
-
-    {/* <Button onClick={() => onDifficultyChosen(Difficulty.EASY)}>Easy</Button> */}
-    <Button onClick={() => onDifficultyChosen(Difficulty.NORMAL)}>
-      Play
-    </Button>
-    <Button onClick={onLeaderboardClick}>Leaderboard</Button>
-    {/* <Button onClick={() => onDifficultyChosen(Difficulty.HARD)}>Hard</Button> */}
-  </div>
-)};
+    <div className={buttonsContainer}>
+      {/* <Button onClick={() => onDifficultyChosen(Difficulty.EASY)}>Easy</Button> */}
+      <Button onClick={() => onDifficultyChosen(Difficulty.NORMAL)}>
+        Play
+      </Button>
+      <Button onClick={onLeaderboardClick}>Leaderboard</Button>
+      {/* <Button onClick={() => onDifficultyChosen(Difficulty.HARD)}>Hard</Button> */}
+    </div>
+  );
+};

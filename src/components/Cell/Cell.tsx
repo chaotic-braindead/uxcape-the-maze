@@ -8,7 +8,7 @@ import {
   facingBottom,
   facingLeft,
   facingRight,
-  facingTop
+  facingTop,
 } from './Cell.css';
 import { useEffect, useMemo, useRef } from 'react';
 import lock from '../../assets/lock.png';
@@ -27,14 +27,14 @@ export const Cell = ({
   playerVisiting,
   mazeEnd,
   solution,
-  playerDirection
+  playerDirection,
 }: CellProps) => {
   const partOfTheSolution = useMemo(
     () => solution.includes(cell),
     [cell, solution],
   );
   const lockedRef = useRef<boolean>(false);
-  
+
   const cellStyles = useMemo(
     () => ({
       borderLeft: cell.walls.left ? undefined : 0,
@@ -46,8 +46,8 @@ export const Cell = ({
   );
 
   const getPlayerDirectionImage = () => {
-    let image: string = "";
-    switch(playerDirection){
+    let image: string = '';
+    switch (playerDirection) {
       case RelativeDirection.DOWN:
         image = facingBottom;
         break;
@@ -62,19 +62,22 @@ export const Cell = ({
         break;
     }
     return image;
-  }
+  };
 
-  useEffect(() => {lockedRef.current = cell.locked;}, [cell.locked])
+  useEffect(() => {
+    lockedRef.current = cell.locked;
+  }, [cell.locked]);
 
   return (
     <div
       style={cellStyles}
       data-testid={`cell_${cell.coordinates.y}_${cell.coordinates.x}`}
       className={`${singleCell} ${mazeEnd ? singleCellMazeEnd : ''} ${
-        playerVisiting ? `${singleCellCurrentlyVisited} ${getPlayerDirectionImage()}` : ''
-      } ${cell.locked ? locked: ''}`}
+        playerVisiting
+          ? `${singleCellCurrentlyVisited} ${getPlayerDirectionImage()}`
+          : ''
+      } ${cell.locked ? locked : ''}`}
       key={`${cell.coordinates.y}${cell.coordinates.x}`}
-    >
-      </div>
+    ></div>
   );
 };

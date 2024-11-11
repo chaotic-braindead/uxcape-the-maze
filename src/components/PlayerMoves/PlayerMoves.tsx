@@ -17,7 +17,7 @@ interface PlayerMovesProps {
   playerPosition: Coordinates;
   onGameFinish: (moves: number) => void;
   onTouchLock: () => void;
-  canMoveRef: React.MutableRefObject<boolean>
+  canMoveRef: React.MutableRefObject<boolean>;
 }
 
 export const PlayerMoves = ({
@@ -26,7 +26,7 @@ export const PlayerMoves = ({
   playerPosition,
   onGameFinish,
   onTouchLock,
-  canMoveRef
+  canMoveRef,
 }: PlayerMovesProps) => {
   const [allMoves, setAllMoves] = useState<Array<Move>>([]);
 
@@ -41,7 +41,7 @@ export const PlayerMoves = ({
         !board[playerPosition.y][playerPosition.x].walls[KEY_TO_WALL[key]];
 
       if (isValidMove && canMoveRef.current) {
-          onPlayerMove(KEY_TO_DIRECTION[key]);
+        onPlayerMove(KEY_TO_DIRECTION[key]);
       }
       setAllMoves((moves) => [...moves, { key, valid: isValidMove }]);
     }
@@ -57,7 +57,5 @@ export const PlayerMoves = ({
 
   useWindowEventListener('keydown', keyDownHandler);
 
-  return (
-    <></>
-  );
+  return <></>;
 };

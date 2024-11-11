@@ -14,7 +14,7 @@ export interface MazeCell {
     right: boolean;
     left: boolean;
   };
-  locked: boolean,
+  locked: boolean;
   visitedDuringGenerating: boolean;
 }
 

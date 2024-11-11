@@ -11,7 +11,7 @@ export const overlay = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  zIndex: 1000
+  zIndex: 1000,
 });
 
 export const content = style({

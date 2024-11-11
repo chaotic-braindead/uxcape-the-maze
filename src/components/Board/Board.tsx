@@ -23,24 +23,26 @@ export const Board = ({
   onTouchLock,
   onGameFinish,
   solution,
-  canMoveRef
+  canMoveRef,
 }: BoardProps) => {
   const [playerPosition, setPlayerPosition] = useState<Coordinates>({
     x: 0,
     y: 0,
   });
-  const [playerDirection, setPlayerDirection] = useState<RelativeDirection>(RelativeDirection.DOWN);
+  const [playerDirection, setPlayerDirection] = useState<RelativeDirection>(
+    RelativeDirection.DOWN,
+  );
 
   useEffect(() => {
     setPlayerPosition({ x: 0, y: 0 });
   }, [board]);
 
   useEffect(() => {
-    if (board[playerPosition.y][playerPosition.x].locked){
+    if (board[playerPosition.y][playerPosition.x].locked) {
       onTouchLock();
       board[playerPosition.y][playerPosition.x].locked = false;
     }
-  }, [playerPosition])
+  }, [playerPosition]);
 
   const movePlayer = (direction: RelativeDirection) => {
     setPlayerDirection(direction);
@@ -57,7 +59,7 @@ export const Board = ({
       case RelativeDirection.RIGHT:
         setPlayerPosition(({ x, y }) => ({ x: x + 1, y }));
         break;
-      }
+    }
   };
 
   const handleGameFinish = useCallback(

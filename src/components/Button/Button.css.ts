@@ -9,14 +9,14 @@ export const button = style([
     background: vars.color.light.main,
     color: vars.color.dark.main,
     fontSize: vars.fontSize.medium,
-    borderRadius: '0.25rem',  
+    borderRadius: '0.25rem',
     ':hover': {
       background: vars.color.light.secondary,
-      cursor: 'pointer'
+      cursor: 'pointer',
     },
     ':disabled': {
       background: vars.color.light.main,
-      cursor: 'not-allowed'
-    }
+      cursor: 'not-allowed',
+    },
   },
 ]);

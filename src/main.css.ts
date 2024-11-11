@@ -17,23 +17,22 @@ globalStyle('body', {
 globalStyle('table', {
   width: '100%',
   borderCollapse: 'collapse',
-  margin: '20px 0'
+  margin: '20px 0',
 });
 
 globalStyle('th', {
   fontWeight: 'bold',
   padding: '12px',
   textAlign: 'center',
-  borderBottom: '2px solid #ddd'
+  borderBottom: '2px solid #ddd',
 });
 
 globalStyle('td', {
-  padding: '10px', 
+  padding: '10px',
   borderBottom: '1px solid #ddd',
-  textAlign: 'center' 
-})
+  textAlign: 'center',
+});
 
 globalStyle('tr:nth-child(even)', {
-  backgroundColor: '#394245'
-})
-
+  backgroundColor: '#394245',
+});

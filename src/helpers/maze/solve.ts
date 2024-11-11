@@ -80,7 +80,11 @@ const backtrackPath = (node: MazeNode): Array<MazeCell> => {
   while (currentNode.parent) {
     if (currentNode.parent) currentNode = currentNode.parent;
     const rand = Math.floor(Math.random() * 20);
-    if (path.length > 0 && (rand == 1 || rand == 10) && lockedCount < maxLocks) {
+    if (
+      path.length > 0 &&
+      (rand == 1 || rand == 10) &&
+      lockedCount < maxLocks
+    ) {
       currentNode.cell.locked = true;
       lockedCount++;
     }

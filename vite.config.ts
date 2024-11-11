@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 export default defineConfig({
-    plugins: [react(), vanillaExtractPlugin()],
-    build: {
-      target: 'node16',
+  plugins: [react(), vanillaExtractPlugin()],
+  build: {
+    target: 'node16',
+  },
+  resolve: {
+    alias: {
+      '@': '/src/',
     },
-    resolve: {
-      alias: {
-        '@': '/src/',
-      },
-    },
+  },
 });
