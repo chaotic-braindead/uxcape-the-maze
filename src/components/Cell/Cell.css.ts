@@ -5,8 +5,8 @@ import character from '../../assets/character.png';
 export const singleCell = style({
   border: `3px solid ${vars.color.accent.warm.main}`,
   overflow: 'hidden',
-  width: '1.85rem',
-  height: '1.85rem',
+  width: '2rem',
+  height: '2rem',
 });
 
 export const singleCellSolutionPart = style({

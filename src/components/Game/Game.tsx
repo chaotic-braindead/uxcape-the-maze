@@ -88,7 +88,11 @@ export const Game = ({
   }, []);
 
   return (
-    <>
+    <div style={{display: 'flex', 
+    flexDirection: 'column', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    gap:'20px', height: '90vh'}}>
       {isLockTouched && (
         <Popup
           question={questions[indexRef.current]}
@@ -115,6 +119,6 @@ export const Game = ({
           onLeaderboardClick={onLeaderboardClick}
         />
       )}
-    </>
+    </div>
   );
 };
