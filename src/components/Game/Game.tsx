@@ -93,10 +93,8 @@ export const Game = ({
     setTimeout(() => {
       setIsLockTouched(false);
       availableQuestionsRef.current = availableQuestionsRef.current.filter((value, index) => index != indexRef.current);
-      console.log(availableQuestionsRef.current);
       indexRef.current = Math.floor(Math.random() * availableQuestionsRef.current.length);
     }, 1000);
-    // setIsLockTouched(false);
   };
 
   const displayPopup = useCallback(() => {
