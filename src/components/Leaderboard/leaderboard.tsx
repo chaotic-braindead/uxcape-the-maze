@@ -84,7 +84,11 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
 
   return (
     <div className={content}>
-      <img className={titleCard} src="/leaderboard-title.png" alt="leaderboards"/>
+      <img
+        className={titleCard}
+        src="/leaderboard-title.png"
+        alt="leaderboards"
+      />
       <div className={tableContainer}>
         <table>
           <thead>

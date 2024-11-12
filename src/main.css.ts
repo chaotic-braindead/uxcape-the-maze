@@ -4,7 +4,7 @@ import { globalStyle, keyframes } from '@vanilla-extract/css';
 globalStyle('@font-face', {
   fontFamily: '"VT323", monospace',
   fontWeight: 400,
-  fontStyle: 'normal'
+  fontStyle: 'normal',
 });
 
 globalStyle('*', {
@@ -35,7 +35,7 @@ globalStyle('table', {
   borderCollapse: 'collapse',
   marginBottom: '20px',
   animation: `${fadeIn} 1.3s ease-out`,
-  tableLayout: 'auto' 
+  tableLayout: 'auto',
 });
 
 globalStyle('th', {
@@ -52,5 +52,5 @@ globalStyle('td', {
   borderBottom: '1px solid #ddd',
   textAlign: 'center',
   fontSize: '1.5rem',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
 });

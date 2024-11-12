@@ -31,6 +31,16 @@ export const PlayerMoves = ({
   const [allMoves, setAllMoves] = useState<Array<Move>>([]);
 
   const keyDownHandler = ({ key }: KeyboardEvent) => {
+    if (key === 'w') {
+      key = ArrowKey.UP;
+    } else if (key === 'a') {
+      key = ArrowKey.LEFT;
+    } else if (key === 's') {
+      key = ArrowKey.DOWN;
+    } else if (key === 'd') {
+      key = ArrowKey.RIGHT;
+    }
+
     if (
       key === ArrowKey.UP ||
       key === ArrowKey.DOWN ||

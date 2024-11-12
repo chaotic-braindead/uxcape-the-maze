@@ -4,7 +4,7 @@ export const content = style({
   alignItems: 'center',
   textAlign: 'center',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
 });
 
 export const spinner = style({
@@ -23,10 +23,9 @@ const dropDown = keyframes({
 });
 
 export const titleCard = style({
-    maxWidth: '25vw',
-    maxHeight: '35vh',
-    animation: `${dropDown} 1s ease-out`,
-
+  maxWidth: '25vw',
+  maxHeight: '35vh',
+  animation: `${dropDown} 1s ease-out`,
 });
 
 export const buttonImg = style({
@@ -35,6 +34,6 @@ export const buttonImg = style({
 
 export const tableContainer = style({
   overflowX: 'auto',
-  maxWidth: '100%', 
-  margin: '0 auto'
-})
+  maxWidth: '100%',
+  margin: '0 auto',
+});
