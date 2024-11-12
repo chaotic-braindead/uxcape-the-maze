@@ -82,7 +82,7 @@ export const Result = ({
         />
         {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
         <Button onClick={handleUsernameSubmit} disabled={error !== ''}>
-          Submit
+          <img style={{height: '3rem', marginBottom: '1.5rem'}} src='/submit.png' alt="submit"/>
         </Button>
       </div>
     </Form>

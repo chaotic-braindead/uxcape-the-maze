@@ -33,9 +33,9 @@ const fadeIn = keyframes({
 globalStyle('table', {
   width: '100%',
   borderCollapse: 'collapse',
-  marginBottom: '20px',
   animation: `${fadeIn} 1.3s ease-out`,
-  tableLayout: 'auto' 
+  tableLayout: 'auto' ,
+  overflow: 'auto'
 });
 
 globalStyle('th', {
@@ -43,14 +43,18 @@ globalStyle('th', {
   padding: '10px',
   textAlign: 'center',
   borderBottom: '2px solid #ddd',
-  fontSize: '1.5rem',
+  fontSize: 'min(2vw, 1.5rem)',
   whiteSpace: 'nowrap',
+  position: 'sticky',
+  zIndex: 1,
+  top: 0,  
+  backgroundColor: '#371968'
 });
 
 globalStyle('td', {
   padding: '5px',
   borderBottom: '1px solid #ddd',
   textAlign: 'center',
-  fontSize: '1.5rem',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
+  fontSize: 'min(2vw, 1.5rem)',
 });

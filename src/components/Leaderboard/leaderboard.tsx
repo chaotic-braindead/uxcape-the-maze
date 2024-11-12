@@ -44,7 +44,7 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
           index == self.findIndex((p) => p.username === player.username),
       );
 
-      setPlayers(uniquePlayers.slice(0, 10));
+      setPlayers(uniquePlayers);
       setLoading(false);
     } catch (error) {
       setError('Error fetching top players: ' + error);

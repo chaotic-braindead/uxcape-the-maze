@@ -16,6 +16,23 @@ interface GameProps {
   onLeaderboardExit: () => void;
 }
 
+const questions: Question[] = [
+  { question: 'What is UI?', choices: ['wee', 'woo'], answer: 0 },
+  { question: 'What is UX1?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX2?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX3?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX4?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX5?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX6?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX7?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX8?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX9?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX10?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX11?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UX12?', choices: ['wee', 'woo'], answer: 1 },
+];
+
+
 export const Game = ({
   initialDifficulty,
   isGameInProgress,
@@ -28,12 +45,11 @@ export const Game = ({
   const [result, setResult] = useState<GameResult>();
   const [isLockTouched, setIsLockTouched] = useState<boolean>(false);
   const selectedChoice = useRef<number>(-1);
-  const [questionIndex, setQuestionIndex] = useState<number>(0);
   const [timeInSeconds, setTimeInSeconds] = useState<number>(0);
   const finishGame = useCallback((result: GameResult) => setResult(result), []);
   const indexRef = useRef<number>(0);
-  const intervalRef = useRef<number | undefined>(undefined);
   const canMoveRef = useRef<boolean>(true);
+  const availableQuestionsRef = useRef<Question[]>(questions);
   const startNewGame = useCallback(
     (difficulty: Difficulty) => {
       generateNewMaze(difficulty);
@@ -41,14 +57,7 @@ export const Game = ({
     [generateNewMaze],
   );
 
-  const questions: Question[] = [
-    { question: 'What is UI?', choices: ['wee', 'woo'], answer: 0 },
-    { question: 'What is UX?', choices: ['wee', 'woo'], answer: 1 },
-    { question: 'What is UX?', choices: ['wee', 'woo'], answer: 1 },
-    { question: 'What is UX?', choices: ['wee', 'woo'], answer: 1 },
-    { question: 'What is UX?', choices: ['wee', 'woo'], answer: 1 },
-  ];
-
+ 
   useEffect(() => {
     setResult(undefined);
   }, [maze]);
@@ -67,19 +76,22 @@ export const Game = ({
 
   const handleSelectChoice = (choice: number) => {
     selectedChoice.current = choice;
-    if (questions[indexRef.current].answer !== selectedChoice.current) {
+    if (availableQuestionsRef.current[indexRef.current].answer !== selectedChoice.current) {
       canMoveRef.current = false;
       setTimeout(() => (canMoveRef.current = true), 3000);
     }
 
     setTimeout(() => {
       setIsLockTouched(false);
-      indexRef.current = indexRef.current + 1;
+      availableQuestionsRef.current = availableQuestionsRef.current.filter((value, index) => index != indexRef.current);
+      console.log(availableQuestionsRef.current);
+      indexRef.current = Math.floor(Math.random() * availableQuestionsRef.current.length);
     }, 1000);
     // setIsLockTouched(false);
   };
 
   const displayPopup = useCallback(() => {
+    indexRef.current = Math.floor(Math.random() * availableQuestionsRef.current.length);
     setIsLockTouched(true);
   }, []);
 
@@ -95,7 +107,7 @@ export const Game = ({
     gap:'20px', height: '90vh'}}>
       {isLockTouched && (
         <Popup
-          question={questions[indexRef.current]}
+          question={availableQuestionsRef.current[indexRef.current]}
           onSelectChoice={handleSelectChoice}
         />
       )}

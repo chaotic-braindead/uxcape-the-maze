@@ -7,7 +7,7 @@ export const vars = createGlobalTheme(':root', {
       secondary: '#636e72',
     },
     light: {
-      main: '#b2bec3',
+      main: '#fcfcfc',
       secondary: '#dfe6e9',
     },
     feedback: {

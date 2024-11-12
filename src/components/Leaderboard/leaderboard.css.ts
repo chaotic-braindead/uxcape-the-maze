@@ -34,7 +34,8 @@ export const buttonImg = style({
 });
 
 export const tableContainer = style({
-  overflowX: 'auto',
-  maxWidth: '100%', 
-  margin: '0 auto'
+  overflowY: 'auto',
+  maxHeight: '53vh', 
+  width: '30vw',
+  marginBottom: '3vh'
 })
