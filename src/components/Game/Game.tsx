@@ -70,8 +70,15 @@ export const Game = ({
   const handleSelectChoice = (choice: number) => {
     selectedChoice.current = choice;
     if (questions[indexRef.current].answer !== selectedChoice.current) {
+      const audio = new Audio('/wrong.mp3');
+
+      audio.play();
       canMoveRef.current = false;
       setTimeout(() => (canMoveRef.current = true), 3000);
+    } else {
+      const audio = new Audio('/correct.mp3');
+
+      audio.play();
     }
 
     setTimeout(() => {
