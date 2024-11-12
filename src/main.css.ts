@@ -4,7 +4,7 @@ import { globalStyle, keyframes } from '@vanilla-extract/css';
 globalStyle('@font-face', {
   fontFamily: '"VT323", monospace',
   fontWeight: 400,
-  fontStyle: 'normal'
+  fontStyle: 'normal',
 });
 
 globalStyle('*', {

@@ -45,6 +45,7 @@ export const Result = ({
         console.error('Error adding player: ', e);
       }
     };
+
     stopTimer();
     addData();
     onLeaderboardClick();
@@ -54,6 +55,7 @@ export const Result = ({
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
+
     if (event.target.value.trim() === '') {
       setError('Username cannot be empty');
     } else {
@@ -61,6 +63,7 @@ export const Result = ({
     }
     usernameRef.current = event.target.value;
   };
+
   useEffect(() => onGameEnd(), []);
   return (
     <Form>

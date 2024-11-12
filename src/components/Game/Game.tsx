@@ -6,6 +6,7 @@ import { GameResult } from '@/model/gameResult';
 import { Result } from '@/components/Result';
 import { Popup } from '../Popup';
 import { Question } from '@/model/question';
+import { gameContainer, gameTitle } from './Game.css';
 
 interface GameProps {
   initialDifficulty: Difficulty;
@@ -69,6 +70,7 @@ export const Game = ({
         else return prev;
       });
     }, 1000);
+
     return () => {
       clearInterval(id);
     };
@@ -77,8 +79,15 @@ export const Game = ({
   const handleSelectChoice = (choice: number) => {
     selectedChoice.current = choice;
     if (availableQuestionsRef.current[indexRef.current].answer !== selectedChoice.current) {
+      const audio = new Audio('/wrong.mp3');
+
+      audio.play();
       canMoveRef.current = false;
       setTimeout(() => (canMoveRef.current = true), 3000);
+    } else {
+      const audio = new Audio('/correct.mp3');
+
+      audio.play();
     }
 
     setTimeout(() => {
@@ -100,27 +109,45 @@ export const Game = ({
   }, []);
 
   return (
-    <div style={{display: 'flex', 
-    flexDirection: 'column', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    gap:'20px', height: '90vh'}}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '20px',
+        height: '90vh',
+      }}
+    >
+      <img className={gameTitle} src="/titlecard.png" alt="TitleCard" />
       {isLockTouched && (
         <Popup
           question={availableQuestionsRef.current[indexRef.current]}
           onSelectChoice={handleSelectChoice}
         />
       )}
-      <Board
-        solution={solution}
-        isLockTouched={isLockTouched}
-        onGameFinish={finishGame}
-        gameInProgress={!result}
-        board={maze}
-        onTouchLock={displayPopup}
-        canMoveRef={canMoveRef}
-      />
-      {<h2>Time Taken (in seconds): {timeInSeconds}</h2>}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+        className={gameContainer}
+      >
+        <Board
+          solution={solution}
+          isLockTouched={isLockTouched}
+          onGameFinish={finishGame}
+          gameInProgress={!result}
+          board={maze}
+          onTouchLock={displayPopup}
+          canMoveRef={canMoveRef}
+        />
+        <h2>
+          Time Taken: {Math.floor(timeInSeconds / 60)}:
+          {String(timeInSeconds % 60).padStart(2, '0')}
+        </h2>
+      </div>
       {result && (
         <Result
           onNewGame={startNewGame}
