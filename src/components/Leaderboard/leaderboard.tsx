@@ -103,7 +103,7 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
               <tr key={player.id}>
                 <td>{player.rank}</td>
                 <td>{player.username}</td>
-                <td>{player.timeTaken}</td>
+                <td>{Math.floor(player.timeTaken / 60)}:{String(player.timeTaken % 60).padStart(2, '0')}</td>
               </tr>
             ))}
           </tbody>

@@ -26,9 +26,9 @@ const slideUp = keyframes({
 
 export const gameTitle = style({
   width: '100%',
-  maxWidth: '500px',
+  maxWidth: '300px',
   height: 'auto',
-  marginBottom: '-50px',
+  marginBottom: '-40px',
   animation: `${dropDown} 1.1s ease-out`,
 });
 
@@ -37,4 +37,5 @@ export const gameContainer = style({
   flexDirection: 'column',
   alignItems: 'center',
   animation: `${slideUp} 0.8s ease-out`,
+  gap: '10px'
 });

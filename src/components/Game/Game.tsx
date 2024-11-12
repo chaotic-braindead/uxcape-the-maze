@@ -115,8 +115,8 @@ export const Game = ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: '20px',
         height: '90vh',
+        gap: '10px'
       }}
     >
       <img className={gameTitle} src="/titlecard.png" alt="TitleCard" />
@@ -127,11 +127,6 @@ export const Game = ({
         />
       )}
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
         className={gameContainer}
       >
         <Board

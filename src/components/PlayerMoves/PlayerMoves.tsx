@@ -30,30 +30,39 @@ export const PlayerMoves = ({
 }: PlayerMovesProps) => {
   const [allMoves, setAllMoves] = useState<Array<Move>>([]);
 
-  const keyDownHandler = ({ key }: KeyboardEvent) => {
-    if (key === 'w') {
-      key = ArrowKey.UP;
-    } else if (key === 'a') {
-      key = ArrowKey.LEFT;
-    } else if (key === 's') {
-      key = ArrowKey.DOWN;
-    } else if (key === 'd') {
-      key = ArrowKey.RIGHT;
-    }
+  const handlePress = (pressedKey: ArrowKey) => {
+    const isValidMove =
+    !board[playerPosition.y][playerPosition.x].walls[KEY_TO_WALL[pressedKey]];
 
+  if (isValidMove && canMoveRef.current) {
+    onPlayerMove(KEY_TO_DIRECTION[pressedKey]);
+  }
+  setAllMoves((moves) => [...moves, { key: pressedKey, valid: isValidMove }]);
+  }
+
+  const keyDownHandler = ({ key }: KeyboardEvent) => {
+    const wasd = 'wasd';
+    if (wasd.includes(key)){
+      let pressedKey: ArrowKey = ArrowKey.UP;
+      if (key === 'w') {
+        pressedKey = ArrowKey.UP;
+      } else if (key === 'a') {
+        pressedKey = ArrowKey.LEFT;
+      } else if (key === 's') {
+        pressedKey = ArrowKey.DOWN;
+      } else if (key === 'd') {
+        pressedKey = ArrowKey.RIGHT;
+      }
+      handlePress(pressedKey);
+      return;
+    }
     if (
       key === ArrowKey.UP ||
       key === ArrowKey.DOWN ||
       key === ArrowKey.LEFT ||
       key === ArrowKey.RIGHT
     ) {
-      const isValidMove =
-        !board[playerPosition.y][playerPosition.x].walls[KEY_TO_WALL[key]];
-
-      if (isValidMove && canMoveRef.current) {
-        onPlayerMove(KEY_TO_DIRECTION[key]);
-      }
-      setAllMoves((moves) => [...moves, { key, valid: isValidMove }]);
+      handlePress(key);
     }
   };
 
