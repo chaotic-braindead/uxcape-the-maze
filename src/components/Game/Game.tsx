@@ -68,7 +68,7 @@ export const Game = ({
 
       audio.play();
       canMoveRef.current = false;
-      setTimeout(() => (canMoveRef.current = true), 3000);
+      setTimeout(() => (canMoveRef.current = true), 5000);
     } else {
       const audio = new Audio('/correct.mp3');
 
@@ -87,6 +87,9 @@ export const Game = ({
   };
 
   const displayPopup = useCallback(() => {
+    if (availableQuestionsRef.current.length === 0) {
+      availableQuestionsRef.current = questions;
+    }
     indexRef.current = Math.floor(
       Math.random() * availableQuestionsRef.current.length,
     );
