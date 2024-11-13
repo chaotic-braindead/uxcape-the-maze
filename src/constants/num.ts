@@ -1,1 +1,2 @@
-export const maxLocks = 15;
+export const maxLocks = 20;
+export const minLockSpacing = 10;

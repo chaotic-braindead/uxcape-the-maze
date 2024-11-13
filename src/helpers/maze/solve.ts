@@ -82,30 +82,7 @@ const backtrackPath = (node: MazeNode): Array<MazeCell> => {
     path.push(currentNode.cell);
     currentNode = currentNode.parent;
   }
-
-  const interval = Math.max(1, Math.floor(path.length / (maxLocks + 1)));
-
-  for (
-    let i = interval;
-    i < path.length && lockedCount < maxLocks;
-    i += interval
-  ) {
-    positionsForLocks.add(i);
-    lockedCount++;
-  }
-
-  lockedCount = 0;
-  const resultPath = [];
-  for (let i = path.length - 1; i >= 0; i--) {
-    const cell = path[i];
-
-    if (positionsForLocks.has(i) && lockedCount < maxLocks) {
-      cell.locked = true;
-      lockedCount++;
-    }
-    resultPath.push(cell);
-  }
-  return resultPath;
+  return path;
 };
 
 const getDistanceBetweenCoordinates = (

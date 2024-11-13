@@ -1,7 +1,7 @@
 import { Size } from '@/model/size';
 import { Maze, MazeCell } from '@/model/maze';
 import { RelativeDirection } from '@/model/enums/relativeDirection';
-import { maxLocks } from '@/constants/num';
+import { maxLocks, minLockSpacing } from '@/constants/num';
 
 export const generateMaze = ({ width, height }: Size): Maze => {
   const maze: Maze = createMazeBoilerplate(width, height);
@@ -11,14 +11,11 @@ export const generateMaze = ({ width, height }: Size): Maze => {
 
   firstCell.visitedDuringGenerating = true;
 
+  // Standard backtracking-based maze generation
   const backTrack = (cell: MazeCell): void => {
     const neighbour = getRandomUnvisitedNeighbour(cell, maze);
 
     if (neighbour) {
-      // if (Math.floor(Math.random() * 35) == 1 && lockedCount < maxLocks) {
-      //   neighbour.locked = true;
-      //   lockedCount++;
-      // }
       neighbour.visitedDuringGenerating = true;
       cellStack.push(neighbour);
       carveWalls([cell, neighbour]);
@@ -27,12 +24,54 @@ export const generateMaze = ({ width, height }: Size): Maze => {
     }
 
     cellStack.pop();
-    if (cellStack[cellStack.length - 1])
+    if (cellStack[cellStack.length - 1]) {
       backTrack(cellStack[cellStack.length - 1]);
+    }
   };
 
+  // Start the backtracking process from the first cell
   backTrack(firstCell);
+
+  // Optional: Add extra paths to make the maze more accessible
+  addExtraPaths(maze, width, height);
+
+  const visitedCells = maze
+    .flat()
+    .filter((cell) => cell.visitedDuringGenerating);
+  const endCell = maze[height - 1][width - 1];
+  placeLocks(visitedCells, firstCell, endCell, width, height);
   return maze;
+};
+
+// Function to create extra paths after the initial maze generation
+const addExtraPaths = (maze: Maze, width: number, height: number) => {
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const cell = maze[y][x];
+      if (Math.random() < 0.3) {
+        // 30% chance to carve an extra path
+        const randomNeighbour = getRandomNeighbour(cell, maze);
+        if (randomNeighbour) {
+          carveWalls([cell, randomNeighbour]);
+        }
+      }
+    }
+  }
+};
+
+const getRandomNeighbour = (
+  cell: MazeCell,
+  maze: Maze,
+): MazeCell | undefined => {
+  const { x, y } = cell.coordinates;
+  const neighbours: Array<MazeCell> = [];
+
+  if (maze[y + 1]?.[x]) neighbours.push(maze[y + 1][x]);
+  if (maze[y - 1]?.[x]) neighbours.push(maze[y - 1][x]);
+  if (maze[y]?.[x + 1]) neighbours.push(maze[y][x + 1]);
+  if (maze[y]?.[x - 1]) neighbours.push(maze[y][x - 1]);
+
+  return neighbours[Math.floor(Math.random() * neighbours.length)];
 };
 
 const createMazeBoilerplate = (width: number, height: number): Maze =>
@@ -104,4 +143,87 @@ const getCellsRelativeDirection = ([
     return isYDifference ? RelativeDirection.DOWN : RelativeDirection.RIGHT;
   }
   return isYDifference ? RelativeDirection.UP : RelativeDirection.LEFT;
+};
+
+const placeLocks = (
+  visitedCells: MazeCell[],
+  start: MazeCell,
+  end: MazeCell,
+  width: number,
+  height: number,
+) => {
+  const locksPerQuadrant = Math.floor(maxLocks / 4);
+  const quadrants: MazeCell[][] = [[], [], [], []]; // Four quadrants
+  const centerX = Math.floor(width / 2);
+  const centerY = Math.floor(height / 2);
+
+  // Divide cells into quadrants
+  for (const cell of visitedCells) {
+    const { x, y } = cell.coordinates;
+    if (x < width / 2 && y < height / 2) quadrants[0].push(cell);
+    // Top-left
+    else if (x >= width / 2 && y < height / 2) quadrants[1].push(cell);
+    // Top-right
+    else if (x < width / 2 && y >= height / 2) quadrants[2].push(cell);
+    // Bottom-left
+    else quadrants[3].push(cell); // Bottom-right
+  }
+
+  const lockedCells: MazeCell[] = [];
+  let lockedCount = 0;
+
+  // Place locks in each quadrant, prioritizing cells near the center
+  for (let i = 0; i < quadrants.length; i++) {
+    const quadrantCells = quadrants[i];
+
+    // Sort quadrant cells by distance to the center, prioritizing center cells
+    const sortedCells = quadrantCells.sort((a, b) => {
+      const distA =
+        Math.abs(a.coordinates.x - centerX) +
+        Math.abs(a.coordinates.y - centerY);
+      const distB =
+        Math.abs(b.coordinates.x - centerX) +
+        Math.abs(b.coordinates.y - centerY);
+      return distA - distB;
+    });
+
+    let quadrantLockCount = 0;
+
+    for (const cell of sortedCells) {
+      if (
+        cell === start ||
+        cell === end ||
+        cell.locked ||
+        quadrantLockCount >= locksPerQuadrant
+      ) {
+        continue;
+      }
+
+      let canPlaceLock = true;
+
+      // Ensure minimum spacing between locks
+      for (const otherCell of lockedCells) {
+        const distance =
+          Math.abs(cell.coordinates.x - otherCell.coordinates.x) +
+          Math.abs(cell.coordinates.y - otherCell.coordinates.y);
+
+        if (distance < minLockSpacing) {
+          canPlaceLock = false;
+          break;
+        }
+      }
+
+      // Place lock if spacing is sufficient
+      if (canPlaceLock) {
+        cell.locked = true;
+        lockedCells.push(cell);
+        lockedCount++;
+        quadrantLockCount++;
+
+        if (lockedCount >= maxLocks) {
+          return; // Stop if we reach the max lock count
+        }
+      }
+    }
+  }
 };
