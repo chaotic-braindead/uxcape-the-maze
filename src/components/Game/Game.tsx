@@ -18,21 +18,20 @@ interface GameProps {
 }
 
 const questions: Question[] = [
-  { question: 'What is UI?', choices: ['wee', 'woo'], answer: 0 },
-  { question: 'What is UX1?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX2?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX3?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX4?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX5?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX6?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX7?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX8?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX9?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX10?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX11?', choices: ['wee', 'woo'], answer: 1 },
-  { question: 'What is UX12?', choices: ['wee', 'woo'], answer: 1 },
+  { question: 'What is UI?', choices: ['wee', 'woo', 'womp'], answer: 0 },
+  { question: 'What is UX1?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX2?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX3?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX4?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX5?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX6?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX7?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX8?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX9?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX10?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX11?', choices: ['wee', 'woo', 'womp'], answer: 1 },
+  { question: 'What is UX12?', choices: ['wee', 'woo', 'womp'], answer: 1 },
 ];
-
 
 export const Game = ({
   initialDifficulty,
@@ -58,7 +57,6 @@ export const Game = ({
     [generateNewMaze],
   );
 
- 
   useEffect(() => {
     setResult(undefined);
   }, [maze]);
@@ -78,7 +76,10 @@ export const Game = ({
 
   const handleSelectChoice = (choice: number) => {
     selectedChoice.current = choice;
-    if (availableQuestionsRef.current[indexRef.current].answer !== selectedChoice.current) {
+    if (
+      availableQuestionsRef.current[indexRef.current].answer !==
+      selectedChoice.current
+    ) {
       const audio = new Audio('/wrong.mp3');
 
       audio.play();
@@ -92,13 +93,19 @@ export const Game = ({
 
     setTimeout(() => {
       setIsLockTouched(false);
-      availableQuestionsRef.current = availableQuestionsRef.current.filter((value, index) => index != indexRef.current);
-      indexRef.current = Math.floor(Math.random() * availableQuestionsRef.current.length);
+      availableQuestionsRef.current = availableQuestionsRef.current.filter(
+        (value, index) => index != indexRef.current,
+      );
+      indexRef.current = Math.floor(
+        Math.random() * availableQuestionsRef.current.length,
+      );
     }, 1000);
   };
 
   const displayPopup = useCallback(() => {
-    indexRef.current = Math.floor(Math.random() * availableQuestionsRef.current.length);
+    indexRef.current = Math.floor(
+      Math.random() * availableQuestionsRef.current.length,
+    );
     setIsLockTouched(true);
   }, []);
 
@@ -114,7 +121,7 @@ export const Game = ({
         justifyContent: 'center',
         alignItems: 'center',
         height: '90vh',
-        gap: '10px'
+        gap: '10px',
       }}
     >
       <img className={gameTitle} src="/titlecard.png" alt="TitleCard" />
@@ -124,9 +131,7 @@ export const Game = ({
           onSelectChoice={handleSelectChoice}
         />
       )}
-      <div
-        className={gameContainer}
-      >
+      <div className={gameContainer}>
         <Board
           solution={solution}
           isLockTouched={isLockTouched}

@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/styles/theme.css';
-import character from '../../assets/character.png';
 
 export const singleCell = style({
   border: `3px solid ${vars.color.accent.warm.main}`,

@@ -78,14 +78,18 @@ const backtrackPath = (node: MazeNode): Array<MazeCell> => {
   let lockedCount = 0;
   const positionsForLocks = new Set<number>();
 
-  while(currentNode.parent){
+  while (currentNode.parent) {
     path.push(currentNode.cell);
     currentNode = currentNode.parent;
   }
 
   const interval = Math.max(1, Math.floor(path.length / (maxLocks + 1)));
 
-  for(let i = interval; i < path.length && lockedCount < maxLocks; i += interval){
+  for (
+    let i = interval;
+    i < path.length && lockedCount < maxLocks;
+    i += interval
+  ) {
     positionsForLocks.add(i);
     lockedCount++;
   }

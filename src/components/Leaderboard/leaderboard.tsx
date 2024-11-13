@@ -54,7 +54,7 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
 
   useEffect(() => {
     fetchTopPlayers();
-    const id = setInterval(fetchTopPlayers, 5000);
+    const id = setInterval(fetchTopPlayers, 3500);
     return () => clearInterval(id);
   }, []);
 
@@ -103,7 +103,10 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
               <tr key={player.id}>
                 <td>{player.rank}</td>
                 <td>{player.username}</td>
-                <td>{Math.floor(player.timeTaken / 60)}:{String(player.timeTaken % 60).padStart(2, '0')}</td>
+                <td>
+                  {Math.floor(player.timeTaken / 60)}:
+                  {String(player.timeTaken % 60).padStart(2, '0')}
+                </td>
               </tr>
             ))}
           </tbody>

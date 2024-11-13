@@ -1,4 +1,4 @@
-import { overlay, content } from './Form.css';
+import { overlay, content, background } from './Form.css';
 
 interface FormProps {
   children?: React.ReactNode;
@@ -7,7 +7,10 @@ interface FormProps {
 export const Form = ({ children }: FormProps) => {
   return (
     <div className={overlay}>
-      <div className={content}>{children}</div>
+      <div className={content}>
+        <img src="/form.png" className={background} />
+        {children}
+      </div>
     </div>
   );
 };

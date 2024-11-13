@@ -1,5 +1,13 @@
-import { style } from '@vanilla-extract/css';
-import { vars } from '@/styles/theme.css';
+import { keyframes, style } from '@vanilla-extract/css';
+
+const fadeIn = keyframes({
+  '0%': {
+    opacity: 0,
+  },
+  '100%': {
+    opacity: 1,
+  },
+});
 
 export const overlay = style({
   position: 'fixed',
@@ -12,14 +20,23 @@ export const overlay = style({
   justifyContent: 'center',
   alignItems: 'center',
   zIndex: 1000,
+  animation: `${fadeIn} 0.5s`,
 });
 
 export const content = style({
-  backgroundColor: vars.color.dark.main,
-  padding: '50px',
-  borderRadius: '20px',
   textAlign: 'center',
   justifyContent: 'center',
   flexDirection: 'column',
   display: 'flex',
+  gap: '5vh',
+});
+
+export const background = style({
+  position: 'absolute',
+  top: '28%',
+  left: '22%',
+  width: '55%',
+  height: '55%',
+  objectFit: 'cover',
+  zIndex: -1,
 });
