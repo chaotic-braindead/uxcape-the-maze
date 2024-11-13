@@ -88,20 +88,6 @@ export const App = () => {
     );
   }
 
-  if (!isLoaded) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-      >
-        <img src="/spinner.svg" />
-      </div>
-    );
-  }
-
   return (
     <main className={mainContainer}>
       <audio ref={audioRef} src="/background-music.mp3" />
