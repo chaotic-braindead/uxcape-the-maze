@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { query, collection, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { Button } from '../Button';
-import { content, spinner, tableContainer } from './leaderboard.css';
+import { button, content, spinner, tableContainer } from './leaderboard.css';
 import { titleCard, buttonImg } from './leaderboard.css';
 
 interface Player {
@@ -112,10 +112,17 @@ export const Leaderboard = ({ onLeaderboardExit }: LeaderboardProps) => {
           </tbody>
         </table>
       </div>
-      <div>
-        <Button onClick={onLeaderboardExit}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <button className={button} onClick={onLeaderboardExit}>
           <img className={buttonImg} src="/back.png" alt="back" />
-        </Button>
+        </button>
       </div>
     </div>
   );

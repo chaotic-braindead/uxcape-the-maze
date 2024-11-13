@@ -46,5 +46,5 @@ export const locked = style({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
-  backgroundImage: `url("/lock.png")`,
+  backgroundImage: `url("/lockresized.gif")`,
 });
