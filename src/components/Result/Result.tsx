@@ -61,23 +61,32 @@ export const Result = ({
   useEffect(() => onGameEnd(), []);
   return (
     <Form>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2vh' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2vh',
+        }}
+      >
         <h1 className={resultText} style={{ fontSize: '2.5vw' }}>
           Congratulations!
         </h1>
-        <label htmlFor="username">Enter username:</label>
+        <label style={{ fontSize: '1.25vw' }} htmlFor="username">
+          Enter username:
+        </label>
         <input
           style={{
             borderRadius: '5px',
-            height: '3vh',
-            padding: '2px',
+            height: '3.25vh',
+            padding: '5px',
             color: '#8937b3',
+            fontSize: '1.25vw',
           }}
           type="text"
           name="username"
           onChange={handleInputChange}
         />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: 'red', fontSize: '1.1vw' }}>{error}</p>}
         <button
           className={button}
           onClick={handleUsernameSubmit}
@@ -85,13 +94,6 @@ export const Result = ({
         >
           Submit
         </button>
-        {/* <Button onClick={handleUsernameSubmit} disabled={error !== ''}>
-          <img
-            style={{ height: '3rem', marginBottom: '1.5rem' }}
-            src="/submit.png"
-            alt="submit"
-          />
-        </Button> */}
       </div>
     </Form>
   );

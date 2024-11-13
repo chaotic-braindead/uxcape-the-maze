@@ -37,9 +37,14 @@ export const choicesList = style({
 });
 
 export const choicesListLi = style({
-  width: '10vw',
+  width: '23vw',
+  whiteSpace: 'normal',
+  display: 'inline-block',
+  padding: '10px',
+  lineHeight: 1.2,
   color: '#8937b3',
-  height: '5vh',
+  height: 'auto',
+  maxHeight: '40vh',
   fontSize: '1.25vw',
   alignContent: 'center',
   textAlign: 'center',
@@ -70,10 +75,10 @@ export const wrongAnswer = style({
 
 export const background = style({
   position: 'absolute',
-  top: '26%',
-  left: '22%',
-  width: '55%',
-  height: '55%',
+  top: '20%',
+  left: '14.5%',
+  width: '70%',
+  height: '70%',
   objectFit: 'cover',
   zIndex: -1,
 });

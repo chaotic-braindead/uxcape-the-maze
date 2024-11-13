@@ -4,8 +4,8 @@ import { vars } from '@/styles/theme.css';
 export const singleCell = style({
   border: `3px solid ${vars.color.accent.warm.main}`,
   overflow: 'hidden',
-  width: '1.85rem',
-  height: '1.85rem',
+  width: '1.67rem',
+  height: '1.67rem',
 });
 
 export const singleCellSolutionPart = style({

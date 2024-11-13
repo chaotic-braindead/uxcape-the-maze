@@ -12,6 +12,7 @@ export const button = style({
   border: '2px solid #8937b3',
   borderRadius: '10px',
   backgroundColor: 'white',
+  fontSize: '1.25vw',
   cursor: 'pointer',
   ':hover': {
     backgroundColor: `rgba(255, 255, 255, 0.75)`,

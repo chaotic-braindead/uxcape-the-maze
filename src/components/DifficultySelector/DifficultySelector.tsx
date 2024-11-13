@@ -17,14 +17,12 @@ export const DifficultySelector = ({
 }: DifficultySelectorProps) => {
   return (
     <div className={buttonsContainer}>
-      {/* <Button onClick={() => onDifficultyChosen(Difficulty.EASY)}>Easy</Button> */}
-      <Button onClick={() => onDifficultyChosen(Difficulty.NORMAL)}>
+      <Button onClick={() => onDifficultyChosen(Difficulty.HARD)}>
         <img className={buttonImg} src="/play.png" alt="Play" />
       </Button>
       <Button onClick={onLeaderboardClick}>
         <img className={buttonImg} src="/leaderboard.png" alt="Leaderboard" />
       </Button>
-      {/* <Button onClick={() => onDifficultyChosen(Difficulty.HARD)}>Hard</Button> */}
     </div>
   );
 };

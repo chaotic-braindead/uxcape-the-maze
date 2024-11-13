@@ -24,14 +24,17 @@ export const Popup = ({ question, onSelectChoice }: PopupProps) => {
     <div id="popup" className={overlay}>
       <div className={content}>
         <img src="/form.png" className={background} />
-        <h1 style={{ fontSize: '3vw' }}>{question.question}</h1>
+        <div
+          style={{ maxWidth: '50vw', lineHeight: '3vw', marginTop: '0.5vw' }}
+        >
+          <h1 style={{ fontSize: '3vw' }}>{question.question}</h1>
+        </div>
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '2vh',
+            gap: '3vh',
           }}
         >
           {question.choices.map((choice, index) => {

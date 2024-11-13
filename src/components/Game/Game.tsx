@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { GameResult } from '@/model/gameResult';
 import { Result } from '@/components/Result';
 import { Popup } from '../Popup';
-import { Question } from '@/model/question';
+import { Question, questions } from '@/model/question';
 import { gameContainer, gameTitle } from './Game.css';
 
 interface GameProps {
@@ -16,22 +16,6 @@ interface GameProps {
   onLeaderboardClick: () => void;
   onLeaderboardExit: () => void;
 }
-
-const questions: Question[] = [
-  { question: 'What is UI?', choices: ['wee', 'woo', 'womp'], answer: 0 },
-  { question: 'What is UX1?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX2?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX3?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX4?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX5?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX6?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX7?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX8?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX9?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX10?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX11?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-  { question: 'What is UX12?', choices: ['wee', 'woo', 'womp'], answer: 1 },
-];
 
 export const Game = ({
   initialDifficulty,
