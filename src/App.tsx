@@ -9,6 +9,8 @@ export const App = () => {
   const [isGameInProgress, setIsGameInProgress] = useState(false);
   const [initialDifficulty, setInitialDifficulty] = useState<Difficulty>();
   const [displayLeaderboard, setDisplayLeaderboard] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const isScreenLargeEnough = useMediaQuery('screen and (min-width: 720px)');
   const userAgent = navigator.userAgent.toLowerCase();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -17,6 +19,31 @@ export const App = () => {
     userAgent.includes('macintosh') ||
     userAgent.includes('linux');
 
+  useEffect(() => {
+    const cssBackgroundImages = [
+      '/left.png',
+      '/right.png',
+      '/top.png',
+      '/bottom.png',
+      '/lockresized.gif',
+    ];
+
+    const loadImages = () => {
+      const promises = cssBackgroundImages.map(
+        (src) =>
+          new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = reject;
+          }),
+      );
+
+      Promise.all(promises).then(() => setIsLoaded(true));
+    };
+
+    loadImages();
+  }, []);
   const startGame = useCallback((difficulty: Difficulty) => {
     setIsGameInProgress(true);
     setInitialDifficulty(difficulty);
@@ -58,6 +85,20 @@ export const App = () => {
           keyboard.
         </h1>
       </main>
+    );
+  }
+
+  if (!isLoaded) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+        }}
+      >
+        <img src="/spinner.svg" />
+      </div>
     );
   }
 
