@@ -25,7 +25,7 @@ export const App = () => {
       '/right.png',
       '/top.png',
       '/bottom.png',
-      '/lockresized.gif',
+      '/lock.gif',
     ];
 
     const loadImages = () => {
@@ -44,6 +44,7 @@ export const App = () => {
 
     loadImages();
   }, []);
+
   const startGame = useCallback((difficulty: Difficulty) => {
     setIsGameInProgress(true);
     setInitialDifficulty(difficulty);
@@ -85,6 +86,20 @@ export const App = () => {
           keyboard.
         </h1>
       </main>
+    );
+  }
+
+  if (!isLoaded) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+        }}
+      >
+        <img src="/spinner.svg" />
+      </div>
     );
   }
 
