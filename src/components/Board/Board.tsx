@@ -87,6 +87,7 @@ export const Board = ({
               }
               key={`${currentY}_${currentX}`}
               playerDirection={playerDirection}
+              canMoveRef={canMoveRef}
             />
           )),
         )}

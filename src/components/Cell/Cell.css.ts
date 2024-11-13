@@ -40,6 +40,10 @@ export const facingBottom = style({
   backgroundImage: `url("/bottom.png")`,
 });
 
+export const stunned = style({
+  backgroundImage: `url("/stunned.gif")`,
+});
+
 export const locked = style({
   width: '100%',
   height: '100%',

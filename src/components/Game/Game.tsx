@@ -65,7 +65,6 @@ export const Game = ({
       selectedChoice.current
     ) {
       const audio = new Audio('/wrong.mp3');
-
       audio.play();
       canMoveRef.current = false;
       setTimeout(() => (canMoveRef.current = true), 5000);

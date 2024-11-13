@@ -9,9 +9,9 @@ import {
   facingLeft,
   facingRight,
   facingTop,
+  stunned,
 } from './Cell.css';
 import { useEffect, useMemo, useRef } from 'react';
-import lock from '../../assets/lock.png';
 import { RelativeDirection } from '@/model/enums/relativeDirection';
 
 interface CellProps {
@@ -20,6 +20,7 @@ interface CellProps {
   mazeEnd: boolean;
   solution: Array<MazeCell>;
   playerDirection: RelativeDirection;
+  canMoveRef: React.MutableRefObject<boolean>;
 }
 
 export const Cell = ({
@@ -28,6 +29,7 @@ export const Cell = ({
   mazeEnd,
   solution,
   playerDirection,
+  canMoveRef,
 }: CellProps) => {
   const partOfTheSolution = useMemo(
     () => solution.includes(cell),
@@ -46,6 +48,9 @@ export const Cell = ({
   );
 
   const getPlayerDirectionImage = () => {
+    if (canMoveRef.current === false) {
+      return stunned;
+    }
     let image: string = '';
     switch (playerDirection) {
       case RelativeDirection.DOWN:
