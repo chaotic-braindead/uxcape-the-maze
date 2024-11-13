@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { Difficulty } from '@/model/enums/difficulty';
 import { Game } from '@/components/Game';
@@ -11,6 +11,7 @@ export const App = () => {
   const [displayLeaderboard, setDisplayLeaderboard] = useState<boolean>(false);
   const isScreenLargeEnough = useMediaQuery('screen and (min-width: 720px)');
   const userAgent = navigator.userAgent.toLowerCase();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const isPC =
     userAgent.includes('windows') ||
     userAgent.includes('macintosh') ||
@@ -19,6 +20,14 @@ export const App = () => {
   const startGame = useCallback((difficulty: Difficulty) => {
     setIsGameInProgress(true);
     setInitialDifficulty(difficulty);
+
+    if (audioRef.current) {
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.15;
+      audioRef.current.play().catch((error) => {
+        console.log(error);
+      });
+    }
   }, []);
 
   const endGame = useCallback(() => {
@@ -30,6 +39,10 @@ export const App = () => {
   }, []);
 
   const onLeaderboardClick = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setDisplayLeaderboard(true);
   }, []);
 
@@ -50,6 +63,7 @@ export const App = () => {
 
   return (
     <main className={mainContainer}>
+      <audio ref={audioRef} src="/background-music.mp3" />
       {initialDifficulty ? (
         <Game
           initialDifficulty={initialDifficulty}
