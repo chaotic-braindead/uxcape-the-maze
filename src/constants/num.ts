@@ -1,1 +1,1 @@
-export const maxLocks = 10;
+export const maxLocks = 15;
