@@ -25,6 +25,7 @@ export const Result = ({
   timeInSeconds,
   onLeaderboardClick,
 }: ResultProps) => {
+  const localStorageUsername = localStorage.getItem('username');
   const usernameRef = useRef<string>('');
   const [error, setError] = useState<string>('Username cannot be empty');
 
@@ -32,13 +33,18 @@ export const Result = ({
     const addData = async () => {
       try {
         await addDoc(collection(db, 'players'), {
-          username: usernameRef.current,
+          username: localStorageUsername
+            ? localStorageUsername
+            : usernameRef.current,
           timeTaken: timeInSeconds,
         });
       } catch (e) {
         console.error('Error adding player: ', e);
       }
     };
+
+    if (localStorageUsername === null)
+      localStorage.setItem('username', usernameRef.current);
 
     stopTimer();
     addData();
@@ -58,43 +64,52 @@ export const Result = ({
     usernameRef.current = event.target.value;
   };
 
-  useEffect(() => onGameEnd(), []);
-  return (
-    <Form>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2vh',
-        }}
-      >
-        <h1 className={resultText} style={{ fontSize: '2.5vw' }}>
-          Congratulations!
-        </h1>
-        <label style={{ fontSize: '1.25vw' }} htmlFor="username">
-          Enter username:
-        </label>
-        <input
+  useEffect(() => {
+    if (localStorageUsername !== null) {
+      handleUsernameSubmit();
+    }
+    onGameEnd();
+  }, []);
+
+  if (localStorageUsername === null) {
+    return (
+      <Form>
+        <div
           style={{
-            borderRadius: '5px',
-            height: '3.25vh',
-            padding: '5px',
-            color: '#8937b3',
-            fontSize: '1.25vw',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2vh',
           }}
-          type="text"
-          name="username"
-          onChange={handleInputChange}
-        />
-        {error && <p style={{ color: 'red', fontSize: '1.1vw' }}>{error}</p>}
-        <button
-          className={button}
-          onClick={handleUsernameSubmit}
-          disabled={error !== ''}
         >
-          Submit
-        </button>
-      </div>
-    </Form>
-  );
+          <h1 className={resultText} style={{ fontSize: '2.5vw' }}>
+            Congratulations!
+          </h1>
+          <label style={{ fontSize: '1.25vw' }} htmlFor="username">
+            Enter username:
+          </label>
+          <input
+            style={{
+              borderRadius: '5px',
+              height: '3.25vh',
+              padding: '5px',
+              color: '#8937b3',
+              fontSize: '1.25vw',
+            }}
+            type="text"
+            name="username"
+            onChange={handleInputChange}
+          />
+          {error && <p style={{ color: 'red', fontSize: '1.1vw' }}>{error}</p>}
+          <button
+            className={button}
+            onClick={handleUsernameSubmit}
+            disabled={error !== ''}
+          >
+            Submit
+          </button>
+        </div>
+      </Form>
+    );
+  }
+  return <></>;
 };

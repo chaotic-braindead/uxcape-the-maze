@@ -26,6 +26,7 @@ export const App = () => {
       '/top.png',
       '/bottom.png',
       '/lock.gif',
+      '/stunned.gif',
     ];
 
     const loadImages = () => {
